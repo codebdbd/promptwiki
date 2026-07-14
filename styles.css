@@ -232,8 +232,8 @@
 
         .sidebar-sec-title {
             font-size: 0.95rem;
-            font-weight: 600;
-            color: var(--text-primary);
+            font-weight: 500;
+            color: var(--sidebar-text);
         }
 
         .sidebar-item a:hover {
