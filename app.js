@@ -84,14 +84,19 @@ function getTerms() {
 
 function renderSidebar() {
   const menu = document.getElementById('sidebar-menu');
-  menu.innerHTML = window.DICTIONARY_DATA.sections.map((section, index) => `
+  menu.innerHTML = window.DICTIONARY_DATA.sections.map((section, index) => {
+    const cleanTitle = section.title
+      .replace(/^Раздел\s+\d+:\s*/, '')
+      .replace(/[\p{Emoji_Presentation}\p{Extended_Pictographic}]/gu, '')
+      .trim();
+    return `
     <li class="sidebar-item" data-sec="${escapeHtml(section.id)}">
       <a href="#${escapeHtml(section.id)}">
         <span class="sidebar-sec-num">Раздел ${index + 1}</span><br>
-        <span class="sidebar-sec-title">${escapeHtml(section.title.replace(/^Раздел\s+\d+:\s*/, ''))}</span>
+        <span class="sidebar-sec-title">${escapeHtml(cleanTitle)}</span>
       </a>
     </li>
-  `).join('');
+  `}).join('');
 }
 
 function renderTermCard(term) {
