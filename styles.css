@@ -466,7 +466,6 @@
 
         .term-card:hover {
             box-shadow: var(--shadow-md);
-            transform: translateY(-2px);
         }
 
         .term-header {
@@ -728,7 +727,7 @@
 
         .related-link:hover {
             background-color: var(--accent);
-            color: white;
+            color: var(--bg-primary);
             border-color: var(--accent);
         }
 
