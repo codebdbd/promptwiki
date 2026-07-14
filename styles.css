@@ -82,8 +82,12 @@
             animation: none !important;
         }
 
+        body {
+            contain: layout style;
+        }
+
         .term-card, .stat-card, .sidebar, .top-bar, .header {
-            contain: style paint;
+            contain: layout style paint;
         }
 
         html {

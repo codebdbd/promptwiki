@@ -210,20 +210,30 @@ function toggleTheme() {
   const isDark = html.style.colorScheme === 'dark';
   const themeIcon = document.getElementById('theme-icon');
   const themeText = document.getElementById('theme-text');
+  const moonSvg = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
+  const sunSvg = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>';
 
-  if (isDark) {
-    html.style.colorScheme = 'light';
-    body.removeAttribute('data-theme');
-    themeIcon.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
-    themeText.textContent = 'Тёмная тема';
-    localStorage.setItem('theme', 'light');
-  } else {
-    html.style.colorScheme = 'dark';
-    body.setAttribute('data-theme', 'dark');
-    themeIcon.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>';
-    themeText.textContent = 'Светлая тема';
-    localStorage.setItem('theme', 'dark');
-  }
+  body.classList.add('no-transition');
+
+  requestAnimationFrame(() => {
+    if (isDark) {
+      html.style.colorScheme = 'light';
+      body.removeAttribute('data-theme');
+      themeIcon.innerHTML = moonSvg;
+      themeText.textContent = 'Тёмная тема';
+      localStorage.setItem('theme', 'light');
+    } else {
+      html.style.colorScheme = 'dark';
+      body.setAttribute('data-theme', 'dark');
+      themeIcon.innerHTML = sunSvg;
+      themeText.textContent = 'Светлая тема';
+      localStorage.setItem('theme', 'dark');
+    }
+
+    requestAnimationFrame(() => {
+      body.classList.remove('no-transition');
+    });
+  });
 }
 
 function loadSavedTheme() {
