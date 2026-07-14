@@ -1,67 +1,71 @@
 :root {
-            --bg-primary: #f8fafc;
+            --bg-primary: #f8f7f4;
             --bg-secondary: #ffffff;
-            --bg-sidebar: #ffffff;
-            --sidebar-text: #64748b;
-            --sidebar-text-active: #0f172a;
-            --sidebar-hover-bg: #f1f5f9;
-            --sidebar-hover-text: #0f172a;
-            --sidebar-active-bg: #e2e8f0;
-            --sidebar-active-text: #0f172a;
-            --header-bg: linear-gradient(135deg, #f8fafc, #eef2ff);
-            --header-text: #0f172a;
-            --focus-border: #cbd5e1;
-            --focus-shadow: rgba(148, 163, 184, 0.25);
-            --text-primary: #1e293b;
-            --text-secondary: #64748b;
-            --accent: #475569;
-            --accent-hover: #334155;
-            --border: #e2e8f0;
-            --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.05);
-            --shadow-md: 0 10px 15px -3px rgb(0 0 0 / 0.08), 0 4px 6px -4px rgb(0 0 0 / 0.08);
+            --bg-sidebar: #faf9f7;
+            --sidebar-text: #6b7280;
+            --sidebar-text-active: #1a1d27;
+            --sidebar-hover-bg: #f3f2ef;
+            --sidebar-hover-text: #1a1d27;
+            --sidebar-active-bg: #f59e0b;
+            --sidebar-active-text: #1a1d27;
+            --sidebar-accent: #f59e0b;
+            --header-bg: linear-gradient(135deg, #faf9f7, #f5f3ef);
+            --header-text: #1a1d27;
+            --focus-border: #f59e0b;
+            --focus-shadow: rgba(245, 158, 11, 0.2);
+            --text-primary: #1a1d27;
+            --text-secondary: #6b7280;
+            --accent: #f59e0b;
+            --accent-hover: #d97706;
+            --accent-secondary: #8b5cf6;
+            --border: #e5e4e0;
+            --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.04), 0 2px 4px -2px rgb(0 0 0 / 0.04);
+            --shadow-md: 0 10px 15px -3px rgb(0 0 0 / 0.06), 0 4px 6px -4px rgb(0 0 0 / 0.06);
             --badge-basic: #22c55e;
             --badge-basic-bg: #f0fdf4;
-            --badge-medium: #eab308;
-            --badge-medium-bg: #fef9c3;
+            --badge-medium: #f59e0b;
+            --badge-medium-bg: #fffbeb;
             --badge-advanced: #ef4444;
             --badge-advanced-bg: #fef2f2;
-            --badge-new: #06b6d4;
-            --badge-new-bg: #ecfeff;
-            --code-bg: #f1f5f9;
-            --code-text: #0f172a;
+            --badge-new: #8b5cf6;
+            --badge-new-bg: #f5f3ff;
+            --code-bg: #f3f2ef;
+            --code-text: #1a1d27;
         }
 
         [data-theme="dark"] {
-            --bg-primary: #090d16;
-            --bg-secondary: #111827;
-            --bg-sidebar: #0b0f19;
+            --bg-primary: #0f1117;
+            --bg-secondary: #1a1d27;
+            --bg-sidebar: #12141c;
             --sidebar-text: #94a3b8;
-            --sidebar-text-active: #ffffff;
-            --sidebar-hover-bg: #1e293b;
-            --sidebar-hover-text: #ffffff;
-            --sidebar-active-bg: rgba(56, 189, 248, 0.12);
-            --sidebar-active-text: #38bdf8;
-            --header-bg: linear-gradient(135deg, #111827, #1e293b);
-            --header-text: #f3f4f6;
-            --focus-border: #38bdf8;
-            --focus-shadow: rgba(56, 189, 248, 0.18);
-            --text-primary: #f3f4f6;
-            --text-secondary: #9ca3af;
-            --accent: #38bdf8;
-            --accent-hover: #0ea5e9;
-            --border: #1f2937;
+            --sidebar-text-active: #e2e8f0;
+            --sidebar-hover-bg: #1e2030;
+            --sidebar-hover-text: #e2e8f0;
+            --sidebar-active-bg: rgba(245, 158, 11, 0.15);
+            --sidebar-active-text: #f59e0b;
+            --sidebar-accent: #f59e0b;
+            --header-bg: linear-gradient(135deg, #1a1d27, #1f1525);
+            --header-text: #e2e8f0;
+            --focus-border: #f59e0b;
+            --focus-shadow: rgba(245, 158, 11, 0.2);
+            --text-primary: #e2e8f0;
+            --text-secondary: #94a3b8;
+            --accent: #f59e0b;
+            --accent-hover: #fbbf24;
+            --accent-secondary: #8b5cf6;
+            --border: #2a2d3a;
             --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.3), 0 2px 4px -2px rgb(0 0 0 / 0.3);
             --shadow-md: 0 10px 15px -3px rgb(0 0 0 / 0.4), 0 4px 6px -4px rgb(0 0 0 / 0.4);
             --badge-basic: #4ade80;
-            --badge-basic-bg: rgba(74, 222, 128, 0.1);
-            --badge-medium: #facc15;
-            --badge-medium-bg: rgba(250, 204, 21, 0.1);
+            --badge-basic-bg: rgba(74, 222, 128, 0.12);
+            --badge-medium: #fbbf24;
+            --badge-medium-bg: rgba(251, 191, 36, 0.12);
             --badge-advanced: #f87171;
-            --badge-advanced-bg: rgba(248, 113, 113, 0.1);
-            --badge-new: #22d3ee;
-            --badge-new-bg: rgba(34, 211, 238, 0.1);
-            --code-bg: #1f2937;
-            --code-text: #f3f4f6;
+            --badge-advanced-bg: rgba(248, 113, 113, 0.12);
+            --badge-new: #a78bfa;
+            --badge-new-bg: rgba(167, 139, 250, 0.12);
+            --code-bg: #1e2030;
+            --code-text: #e2e8f0;
         }
 
         * {
@@ -184,7 +188,7 @@
         }
 
         .sidebar-brand {
-            font-family: 'Outfit', sans-serif;
+            font-family: 'Space Grotesk', sans-serif;
             font-size: 1rem;
             font-weight: 700;
             color: var(--text-primary);
@@ -219,7 +223,8 @@
             display: block;
             padding: 10px 12px;
             border-radius: 8px;
-            transition: background-color 0.2s, color 0.2s;
+            border-left: 3px solid transparent;
+            transition: background-color 0.2s, color 0.2s, border-color 0.2s;
             white-space: normal;
             line-height: 1.4;
         }
@@ -245,6 +250,7 @@
             background-color: var(--sidebar-active-bg);
             color: var(--sidebar-active-text);
             font-weight: 600;
+            border-left-color: var(--sidebar-accent);
         }
 
         /* Main Content area */
@@ -359,7 +365,7 @@
         }
 
         .header h1 {
-            font-family: 'Outfit', sans-serif;
+            font-family: 'Space Grotesk', sans-serif;
             font-size: clamp(2.1rem, 2.3vw, 2.6rem);
             font-weight: 700;
             margin-bottom: 14px;
@@ -392,7 +398,7 @@
         .stat-val {
             font-size: 1.6rem;
             font-weight: 700;
-            font-family: 'Outfit', sans-serif;
+            font-family: 'Space Grotesk', sans-serif;
         }
 
         .stat-lbl {
@@ -434,7 +440,7 @@
         }
 
         .section-header h2 {
-            font-family: 'Outfit', sans-serif;
+            font-family: 'Space Grotesk', sans-serif;
             font-size: 1.8rem;
             color: var(--text-primary);
             font-weight: 700;
@@ -480,7 +486,7 @@
         }
 
         .term-title {
-            font-family: 'Outfit', sans-serif;
+            font-family: 'Space Grotesk', sans-serif;
             font-size: 1.4rem;
             font-weight: 700;
             color: var(--text-primary);
@@ -575,7 +581,7 @@
         .md-content h4,
         .md-content h5,
         .md-content h6 {
-            font-family: 'Outfit', sans-serif;
+            font-family: 'Space Grotesk', sans-serif;
             line-height: 1.22;
             color: var(--text-primary);
             letter-spacing: 0;
@@ -627,7 +633,7 @@
             color: var(--code-text);
             border-radius: 6px;
             padding: 0.08em 0.35em;
-            font-family: 'Fira Code', monospace;
+            font-family: 'JetBrains Mono', monospace;
             font-size: 0.92em;
         }
 
@@ -679,7 +685,7 @@
         }
 
         .example-content {
-            font-family: 'Fira Code', monospace;
+            font-family: 'JetBrains Mono', monospace;
             font-size: 0.9rem;
             color: var(--code-text);
             white-space: pre-wrap;
