@@ -205,18 +205,24 @@ function toggleTheme() {
   const themeIcon = document.getElementById('theme-icon');
   const themeText = document.getElementById('theme-text');
 
+  body.classList.add('no-transition');
+
+  if (currentTheme === 'dark') {
+    body.removeAttribute('data-theme');
+    themeIcon.textContent = '🌙';
+    themeText.textContent = 'Тёмная тема';
+    localStorage.setItem('theme', 'light');
+  } else {
+    body.setAttribute('data-theme', 'dark');
+    themeIcon.textContent = '☀️';
+    themeText.textContent = 'Светлая тема';
+    localStorage.setItem('theme', 'dark');
+  }
+
   requestAnimationFrame(() => {
-    if (currentTheme === 'dark') {
-      body.removeAttribute('data-theme');
-      themeIcon.textContent = '🌙';
-      themeText.textContent = 'Тёмная тема';
-      localStorage.setItem('theme', 'light');
-    } else {
-      body.setAttribute('data-theme', 'dark');
-      themeIcon.textContent = '☀️';
-      themeText.textContent = 'Светлая тема';
-      localStorage.setItem('theme', 'dark');
-    }
+    requestAnimationFrame(() => {
+      body.classList.remove('no-transition');
+    });
   });
 }
 

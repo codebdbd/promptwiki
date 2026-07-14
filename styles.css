@@ -71,6 +71,13 @@
             scroll-behavior: smooth;
         }
 
+        body.no-transition *,
+        body.no-transition *::before,
+        body.no-transition *::after {
+            transition: none !important;
+            animation: none !important;
+        }
+
         .term-card, .stat-card, .sidebar, .top-bar, .header {
             contain: style paint;
         }
