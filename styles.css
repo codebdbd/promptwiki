@@ -1,71 +1,71 @@
 :root {
-            --bg-primary: #ffffff;
+            --bg-primary: #fafafa;
             --bg-secondary: #ffffff;
-            --bg-sidebar: #f9fafb;
-            --sidebar-text: #4b5563;
-            --sidebar-text-active: #111827;
-            --sidebar-hover-bg: #f3f4f6;
-            --sidebar-hover-text: #111827;
-            --sidebar-active-bg: #dbeafe;
-            --sidebar-active-text: #1e40af;
-            --sidebar-accent: #3b82f6;
-            --header-bg: #ffffff;
-            --header-text: #111827;
-            --focus-border: #3b82f6;
-            --focus-shadow: rgba(59, 130, 246, 0.15);
-            --text-primary: #111827;
-            --text-secondary: #4b5563;
-            --accent: #3b82f6;
-            --accent-hover: #2563eb;
-            --accent-secondary: #8b5cf6;
-            --border: #e5e7eb;
-            --shadow: 0 1px 3px rgb(0 0 0 / 0.1);
-            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+            --bg-sidebar: #fafafa;
+            --sidebar-text: #71717a;
+            --sidebar-text-active: #18181b;
+            --sidebar-hover-bg: #f4f4f5;
+            --sidebar-hover-text: #18181b;
+            --sidebar-active-bg: #f4f4f5;
+            --sidebar-active-text: #18181b;
+            --sidebar-accent: #18181b;
+            --header-bg: #fafafa;
+            --header-text: #18181b;
+            --focus-border: #18181b;
+            --focus-shadow: rgba(24, 24, 27, 0.1);
+            --text-primary: #18181b;
+            --text-secondary: #71717a;
+            --accent: #18181b;
+            --accent-hover: #27272a;
+            --accent-secondary: #71717a;
+            --border: #e4e4e7;
+            --shadow: 0 1px 2px rgb(0 0 0 / 0.05);
+            --shadow-md: 0 1px 3px rgb(0 0 0 / 0.1);
             --badge-basic: #16a34a;
-            --badge-basic-bg: #dcfce7;
+            --badge-basic-bg: #f0fdf4;
             --badge-medium: #d97706;
-            --badge-medium-bg: #fef3c7;
+            --badge-medium-bg: #fffbeb;
             --badge-advanced: #dc2626;
-            --badge-advanced-bg: #fee2e2;
+            --badge-advanced-bg: #fef2f2;
             --badge-new: #7c3aed;
-            --badge-new-bg: #ede9fe;
-            --code-bg: #f3f4f6;
-            --code-text: #111827;
+            --badge-new-bg: #f5f3ff;
+            --code-bg: #f4f4f5;
+            --code-text: #18181b;
         }
 
         [data-theme="dark"] {
-            --bg-primary: #111827;
-            --bg-secondary: #1f2937;
-            --bg-sidebar: #0f172a;
-            --sidebar-text: #94a3b8;
-            --sidebar-text-active: #f1f5f9;
-            --sidebar-hover-bg: #1e293b;
-            --sidebar-hover-text: #f1f5f9;
-            --sidebar-active-bg: rgba(59, 130, 246, 0.15);
-            --sidebar-active-text: #60a5fa;
-            --sidebar-accent: #3b82f6;
-            --header-bg: #111827;
-            --header-text: #f1f5f9;
-            --focus-border: #3b82f6;
-            --focus-shadow: rgba(59, 130, 246, 0.25);
-            --text-primary: #f1f5f9;
-            --text-secondary: #94a3b8;
-            --accent: #60a5fa;
-            --accent-hover: #3b82f6;
-            --accent-secondary: #a78bfa;
-            --border: #374151;
-            --shadow: 0 1px 3px rgb(0 0 0 / 0.4);
-            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.5);
+            --bg-primary: #09090b;
+            --bg-secondary: #18181b;
+            --bg-sidebar: #09090b;
+            --sidebar-text: #a1a1aa;
+            --sidebar-text-active: #fafafa;
+            --sidebar-hover-bg: #18181b;
+            --sidebar-hover-text: #fafafa;
+            --sidebar-active-bg: #18181b;
+            --sidebar-active-text: #fafafa;
+            --sidebar-accent: #fafafa;
+            --header-bg: #09090b;
+            --header-text: #fafafa;
+            --focus-border: #fafafa;
+            --focus-shadow: rgba(250, 250, 250, 0.1);
+            --text-primary: #fafafa;
+            --text-secondary: #a1a1aa;
+            --accent: #fafafa;
+            --accent-hover: #e4e4e7;
+            --accent-secondary: #a1a1aa;
+            --border: #27272a;
+            --shadow: 0 1px 2px rgb(0 0 0 / 0.5);
+            --shadow-md: 0 1px 3px rgb(0 0 0 / 0.6);
             --badge-basic: #4ade80;
-            --badge-basic-bg: rgba(74, 222, 128, 0.15);
+            --badge-basic-bg: rgba(74, 222, 128, 0.1);
             --badge-medium: #fbbf24;
-            --badge-medium-bg: rgba(251, 191, 36, 0.15);
+            --badge-medium-bg: rgba(251, 191, 36, 0.1);
             --badge-advanced: #f87171;
-            --badge-advanced-bg: rgba(248, 113, 113, 0.15);
+            --badge-advanced-bg: rgba(248, 113, 113, 0.1);
             --badge-new: #a78bfa;
-            --badge-new-bg: rgba(167, 139, 250, 0.15);
-            --code-bg: #1e293b;
-            --code-text: #e2e8f0;
+            --badge-new-bg: rgba(167, 139, 250, 0.1);
+            --code-bg: #18181b;
+            --code-text: #e4e4e7;
         }
 
         * {
@@ -412,20 +412,18 @@
             align-items: center;
             gap: 8px;
             margin-top: 24px;
-            padding: 12px 24px;
-            background: linear-gradient(135deg, #ef4444, #f97316);
-            color: #fff;
-            font-weight: 600;
-            font-size: 1rem;
-            border-radius: 12px;
+            padding: 10px 20px;
+            background: var(--accent);
+            color: var(--bg-primary);
+            font-weight: 500;
+            font-size: 0.875rem;
+            border-radius: 8px;
             text-decoration: none;
-            transition: transform 0.2s, box-shadow 0.2s;
-            box-shadow: 0 4px 14px rgba(239, 68, 68, 0.3);
+            transition: background-color 0.15s;
         }
 
         .support-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(239, 68, 68, 0.4);
+            background: var(--accent-hover);
         }
 
         /* Section header */
