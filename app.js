@@ -134,14 +134,14 @@ function renderTermCard(term) {
       <div class="example-box">
         <div class="example-title">
           <span>Пример:</span>
-          <button class="copy-btn" type="button" onclick="copyText(this, this.closest('.example-box').querySelector('code').innerText)">📋 Копировать</button>
+          <button class="copy-btn" type="button" onclick="copyText(this, this.closest('.example-box').querySelector('code').innerText)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Копировать</button>
         </div>
         <pre class="example-content"><code>${escapeHtml(term.example)}</code></pre>
       </div>
   ` : '';
   const extraBlock = term.extra ? `
       <div class="extra-context">
-        <div class="extra-label">💡 ${escapeHtml(term.extra_label || 'Заметка')}:</div>
+        <div class="extra-label"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg> ${escapeHtml(term.extra_label || 'Заметка')}:</div>
         <div class="md-content">${renderMarkdown(term.extra)}</div>
       </div>
   ` : '';
@@ -182,7 +182,7 @@ function renderContent() {
 function renderStatsSection() {
   return `
     <div class="section-wrapper" id="sec-stats">
-      <div class="section-header"><h2>📊 Статистика словаря и обновления</h2></div>
+      <div class="section-header"><h2>Статистика словаря и обновления</h2></div>
       <div class="term-card stats-summary-card">
         <div class="term-definition">
           Словарь приведен к релизной структуре: 21 тематический раздел, явные типы карточек, компактный указатель акронимов, развернутые определения, практическая важность, примеры, дополнительный контекст и связанные термины для полноценных статей.
@@ -214,13 +214,13 @@ function toggleTheme() {
   if (isDark) {
     html.style.colorScheme = 'light';
     body.removeAttribute('data-theme');
-    themeIcon.textContent = '🌙';
+    themeIcon.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
     themeText.textContent = 'Тёмная тема';
     localStorage.setItem('theme', 'light');
   } else {
     html.style.colorScheme = 'dark';
     body.setAttribute('data-theme', 'dark');
-    themeIcon.textContent = '☀️';
+    themeIcon.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>';
     themeText.textContent = 'Светлая тема';
     localStorage.setItem('theme', 'dark');
   }
@@ -229,15 +229,17 @@ function toggleTheme() {
 function loadSavedTheme() {
   if (window.Telegram?.WebApp) return;
   const savedTheme = localStorage.getItem('theme');
+  const moonIcon = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
+  const sunIcon = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>';
   if (savedTheme === 'light') {
     document.documentElement.style.colorScheme = 'light';
     document.body.removeAttribute('data-theme');
-    document.getElementById('theme-icon').textContent = '🌙';
+    document.getElementById('theme-icon').innerHTML = moonIcon;
     document.getElementById('theme-text').textContent = 'Тёмная тема';
   } else {
     document.documentElement.style.colorScheme = 'dark';
     document.body.setAttribute('data-theme', 'dark');
-    document.getElementById('theme-icon').textContent = '☀️';
+    document.getElementById('theme-icon').innerHTML = sunIcon;
     document.getElementById('theme-text').textContent = 'Светлая тема';
   }
 }
@@ -266,7 +268,7 @@ function toggleSidebar() {
 function copyText(btn, text) {
   navigator.clipboard.writeText(text).then(() => {
     const originalText = btn.innerHTML;
-    btn.innerHTML = '✅ Скопировано!';
+    btn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Скопировано!';
     setTimeout(() => {
       btn.innerHTML = originalText;
     }, 1500);

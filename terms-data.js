@@ -8,7 +8,7 @@ window.DICTIONARY_DATA = {
   "sections": [
     {
       "id": "sec-1",
-      "title": "Раздел 1: 🎯 Основы промптинга",
+      "title": "Раздел 1: Основы промптинга",
       "terms": [
         {
           "title": "Промпт",

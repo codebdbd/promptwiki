@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>📘 Полный словарь промпт-инженера</title>
+    <title>Полный словарь промпт-инженера</title>
     <meta name="description" content="Интерактивный справочник по промпт-инженерии, LLM-системам, RAG, агентам, оценке качества и эксплуатации AI-продуктов.">
     <link rel="icon" href="favicon.svg" type="image/svg+xml">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -45,7 +45,7 @@
                 <input type="text" class="search-input" id="search" placeholder="Быстрый поиск по термину или разделу..." oninput="handleSearch()" aria-label="Поиск термина или раздела">
             </div>
             <button class="theme-toggle" type="button" onclick="toggleTheme()">
-                <span id="theme-icon">☀️</span> <span id="theme-text">Светлая тема</span>
+                <span id="theme-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg></span> <span id="theme-text">Светлая тема</span>
             </button>
         </div>
 
@@ -59,22 +59,22 @@
                 </div>
                 <div class="stat-card">
                     <div class="stat-val" id="stat-basic" style="color: var(--badge-basic);">0</div>
-                    <div class="stat-lbl">Базовые (🟢)</div>
+                    <div class="stat-lbl">Базовые</div>
                 </div>
                 <div class="stat-card">
                     <div class="stat-val" id="stat-medium" style="color: var(--badge-medium);">0</div>
-                    <div class="stat-lbl">Средние (🟡)</div>
+                    <div class="stat-lbl">Средние</div>
                 </div>
                 <div class="stat-card">
                     <div class="stat-val" id="stat-advanced" style="color: var(--badge-advanced);">0</div>
-                    <div class="stat-lbl">Экспертные (🔴)</div>
+                    <div class="stat-lbl">Продвинутые</div>
                 </div>
                 <div class="stat-card">
                     <div class="stat-val" id="stat-new" style="color: var(--badge-new);">0</div>
-                    <div class="stat-lbl">Новинки (🆕)</div>
+                    <div class="stat-lbl">Новое</div>
                 </div>
             </div>
-            <a href="https://codebdbd.github.io/" target="_blank" rel="noopener noreferrer" class="support-btn">❤️ Поддержать проект</a>
+            <a href="https://codebdbd.github.io/" target="_blank" rel="noopener noreferrer" class="support-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg> Поддержать проект</a>
         </header>
 
         <div id="content-container"></div>
