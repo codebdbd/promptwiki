@@ -332,17 +332,33 @@ function handleSearch() {
 }
 
 function observeSections() {
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (!entry.isIntersecting) return;
-      const id = entry.target.id;
-      document.querySelectorAll('.sidebar-item').forEach(item => {
-        item.classList.toggle('active', item.getAttribute('data-sec') === id);
-      });
-    });
-  }, { threshold: 0.1 });
+  let currentActive = null;
+  const sections = document.querySelectorAll('.section-wrapper');
+  const sidebarItems = document.querySelectorAll('.sidebar-item');
 
-  document.querySelectorAll('.section-wrapper').forEach(section => observer.observe(section));
+  const observer = new IntersectionObserver((entries) => {
+    let bestEntry = null;
+    let bestRatio = 0;
+
+    entries.forEach(entry => {
+      if (entry.isIntersecting && entry.intersectionRatio > bestRatio) {
+        bestRatio = entry.intersectionRatio;
+        bestEntry = entry;
+      }
+    });
+
+    if (bestEntry && bestEntry.target.id !== currentActive) {
+      currentActive = bestEntry.target.id;
+      sidebarItems.forEach(item => {
+        item.classList.toggle('active', item.getAttribute('data-sec') === currentActive);
+      });
+    }
+  }, {
+    threshold: [0, 0.1, 0.2, 0.3],
+    rootMargin: '-10% 0px -60% 0px'
+  });
+
+  sections.forEach(section => observer.observe(section));
 }
 
 function initDictionary() {
