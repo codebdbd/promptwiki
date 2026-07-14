@@ -75,16 +75,6 @@
             scroll-behavior: smooth;
         }
 
-        body {
-            contain: layout style;
-            background-color: var(--bg-primary);
-            color: var(--text-primary);
-        }
-
-        .term-card, .stat-card, .sidebar, .top-bar, .header {
-            contain: layout style paint;
-        }
-
         html {
             scrollbar-width: thin;
             scrollbar-color: color-mix(in srgb, var(--accent) 58%, transparent) var(--bg-primary);

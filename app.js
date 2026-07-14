@@ -205,7 +205,6 @@ function updateStats() {
 }
 
 function toggleTheme() {
-  const html = document.documentElement;
   const body = document.body;
   const isDark = body.hasAttribute('data-theme');
   const themeIcon = document.getElementById('theme-icon');
@@ -215,13 +214,11 @@ function toggleTheme() {
 
   if (isDark) {
     body.removeAttribute('data-theme');
-    html.style.colorScheme = 'light';
     themeIcon.innerHTML = moonSvg;
     themeText.textContent = 'Тёмная тема';
     localStorage.setItem('theme', 'light');
   } else {
     body.setAttribute('data-theme', 'dark');
-    html.style.colorScheme = 'dark';
     themeIcon.innerHTML = sunSvg;
     themeText.textContent = 'Светлая тема';
     localStorage.setItem('theme', 'dark');
