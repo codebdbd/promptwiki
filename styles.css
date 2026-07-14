@@ -33,7 +33,11 @@
             --code-text: #18181b;
         }
 
-        [data-theme="dark"] {
+        /* Атрибут data-theme навешивается на <html> через JS.
+           Это гарантирует, что ВСЕ элементы (включая html-фон)
+           мгновенно получают новые CSS-переменные в один цикл рендера. */
+        html[data-theme="dark"],
+        body[data-theme="dark"] {
             --bg-primary: #09090b;
             --bg-secondary: #18181b;
             --bg-sidebar: #09090b;
@@ -75,11 +79,24 @@
             scroll-behavior: smooth;
         }
 
+        /* Этот класс JS добавляет на <html> ПЕРЕД сменой темы и убирает ПОСЛЕ.
+           Пока он активен — все transitions на странице отключены.
+           Это гарантирует атомарную смену цветов: все элементы меняются
+           одновременно в один кадр, без мерцания и рваной картинки. */
+        .theme-switching *,
+        .theme-switching *::before,
+        .theme-switching *::after {
+            transition: none !important;
+        }
+
         html {
             background-color: var(--bg-primary);
             color: var(--text-primary);
             scrollbar-width: thin;
             scrollbar-color: color-mix(in srgb, var(--accent) 58%, transparent) var(--bg-primary);
+            /* Намеренно БЕЗ transition: смена темы должна быть мгновенной.
+               Transition на фоне вызывает рассинхрон между html/body/другими элементами
+               и создаёт именно тот «рваный» эффект. */
         }
 
         body, .sidebar, .example-content {
@@ -150,11 +167,11 @@
             font-family: 'Inter', sans-serif;
             font-size: 16px;
             line-height: 1.6;
-            background-color: var(--bg-primary);
+            /* background-color намеренно убран — html уже рисует фон.
+               transition убран — смена темы должна быть мгновенной. */
             color: var(--text-primary);
             display: flex;
             min-height: 100vh;
-            transition: background-color 0.3s, color 0.3s;
         }
 
         /* Sidebar styling */
@@ -271,6 +288,7 @@
             margin-bottom: 20px;
             position: sticky;
             top: 0;
+            /* Используем inherit чтобы фон всегда совпадал с html без отдельной окраски */
             background-color: var(--bg-primary);
             padding: 18px 0;
             z-index: 90;
@@ -281,6 +299,12 @@
             position: relative;
             flex: 1;
             max-width: 500px;
+        }
+
+        .top-actions {
+            display: flex;
+            align-items: center;
+            gap: 12px;
         }
 
         .search-input {
@@ -330,6 +354,12 @@
             background-color: var(--border);
         }
 
+        /* Инвертируем светлые иконки в темные для светлой темы */
+        html:not([data-theme="dark"]) .theme-toggle img,
+        html:not([data-theme="dark"]) .extra-label img {
+            filter: invert(1);
+        }
+
         /* Header Section */
         .header {
             margin-bottom: 45px;
@@ -376,11 +406,11 @@
         }
 
         .stat-card {
-            background: rgba(255, 255, 255, 0.1);
+            background: color-mix(in srgb, var(--text-primary) 4%, transparent);
             backdrop-filter: blur(10px);
             padding: 15px;
             border-radius: 16px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            border: 1px solid color-mix(in srgb, var(--text-primary) 10%, transparent);
             text-align: center;
         }
 
@@ -400,13 +430,12 @@
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            margin-top: 24px;
-            padding: 10px 20px;
+            padding: 10px 16px;
             background: var(--accent);
             color: var(--bg-primary);
             font-weight: 500;
-            font-size: 0.875rem;
-            border-radius: 8px;
+            font-size: 0.9rem;
+            border-radius: 12px;
             text-decoration: none;
             transition: background-color 0.15s;
         }
@@ -787,12 +816,23 @@
                 align-items: stretch;
                 gap: 14px;
             }
+            .top-actions {
+                width: 100%;
+            }
+            .top-actions .support-btn,
+            .top-actions .theme-toggle {
+                flex: 1;
+                justify-content: center;
+            }
             .search-summary {
                 font-size: 0.92rem;
                 padding: 14px 16px;
             }
             .header {
                 padding: 28px 24px;
+            }
+            .section-header h2 {
+                font-size: 1.35rem;
             }
             .term-card {
                 padding: 22px;

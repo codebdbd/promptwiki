@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ru" style="color-scheme: dark;">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,7 +15,23 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <link rel="stylesheet" href="styles.css">
     <script>
-        // Инициализация WebApp
+        // Критический скрипт: применяем тему ДО рендера страницы.
+        // Это предотвращает "вспышку" неправильного фона (FOUC).
+        // Запускается синхронно в <head>, до парсинга <body>.
+        (function() {
+            try {
+                if (window.Telegram?.WebApp) return; // Telegram управляет темой сам
+                var saved = localStorage.getItem('theme');
+                // По умолчанию — тёмная тема (если нет сохранённого значения)
+                if (saved !== 'light') {
+                    document.documentElement.setAttribute('data-theme', 'dark');
+                    document.documentElement.style.colorScheme = 'dark';
+                }
+            } catch(e) {}
+        })();
+    </script>
+    <script>
+        // Инициализация Telegram WebApp
         if (window.Telegram?.WebApp) {
             const tg = window.Telegram.WebApp;
             tg.ready();
@@ -23,7 +39,7 @@
         }
     </script>
 </head>
-<body data-theme="dark">
+<body>
     <button class="menu-toggle-btn" type="button" onclick="toggleSidebar()" aria-label="Открыть меню разделов">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
     </button>
@@ -31,7 +47,14 @@
     <aside class="sidebar" id="sidebar">
         <div class="sidebar-brand">
             <a href="#" class="sidebar-logo-link" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">
-                <img src="logo.png" alt="Словарь промпт-инженера" class="sidebar-logo">
+                <img
+                    id="sidebar-logo"
+                    src="img/logo_dark.svg"
+                    data-src-dark="img/logo_dark.svg"
+                    data-src-light="img/logo_light.svg"
+                    alt="Словарь промпт-инженера"
+                    class="sidebar-logo"
+                >
             </a>
         </div>
         <ul class="sidebar-menu" id="sidebar-menu"></ul>
@@ -44,9 +67,12 @@
                 <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
                 <input type="text" class="search-input" id="search" placeholder="Быстрый поиск по термину или разделу..." oninput="handleSearch()" aria-label="Поиск термина или раздела">
             </div>
-            <button class="theme-toggle" type="button" onclick="toggleTheme()">
-                <span id="theme-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg></span> <span id="theme-text">Светлая тема</span>
-            </button>
+            <div class="top-actions">
+                <a href="https://codebdbd.github.io/" target="_blank" rel="noopener noreferrer" class="support-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg> Поддержать проект</a>
+                <button class="theme-toggle" type="button" onclick="toggleTheme()">
+                    <span id="theme-icon"><img src="img/light.svg" alt="Тема" width="20" height="20" style="vertical-align:middle;"></span> <span id="theme-text">Светлая тема</span>
+                </button>
+            </div>
         </div>
 
         <header class="header">
@@ -69,12 +95,7 @@
                     <div class="stat-val" id="stat-advanced" style="color: var(--badge-advanced);">0</div>
                     <div class="stat-lbl">Продвинутые</div>
                 </div>
-                <div class="stat-card">
-                    <div class="stat-val" id="stat-new" style="color: var(--badge-new);">0</div>
-                    <div class="stat-lbl">Новое</div>
-                </div>
             </div>
-            <a href="https://codebdbd.github.io/" target="_blank" rel="noopener noreferrer" class="support-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg> Поддержать проект</a>
         </header>
 
         <div id="content-container"></div>

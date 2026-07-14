@@ -30,7 +30,7 @@ function escapeHtml(value) {
 
 function renderInlineMarkdown(value) {
   const source = String(value ?? '');
-  const pattern = /(`[^`\n]+`)|\[([^\]\n]+)\]\((https?:\/\/[^\s)]+)\)/g;
+  const pattern = /(`[^`\n]+`)|(\[([^\]\n]+)\]\((https?:\/\/[^\s)]+)\))/g;
   let result = '';
   let lastIndex = 0;
   let match;
@@ -41,11 +41,11 @@ function renderInlineMarkdown(value) {
     if (match[1]) {
       result += `<code>${escapeHtml(match[1].slice(1, -1))}</code>`;
     } else {
-      const href = match[3];
+      const href = match[4];
       try {
         const url = new URL(href);
         if (url.protocol === 'http:' || url.protocol === 'https:') {
-          result += `<a href="${escapeHtml(url.href)}" target="_blank" rel="noopener noreferrer">${escapeHtml(match[2])}</a>`;
+          result += `<a href="${escapeHtml(url.href)}" target="_blank" rel="noopener noreferrer">${escapeHtml(match[3])}</a>`;
         } else {
           result += escapeHtml(match[0]);
         }
@@ -96,7 +96,8 @@ function renderSidebar() {
         <span class="sidebar-sec-title">${escapeHtml(cleanTitle)}</span>
       </a>
     </li>
-  `}).join('');
+  `;
+  }).join('');
 }
 
 function renderTermCard(term) {
@@ -141,7 +142,7 @@ function renderTermCard(term) {
   ` : '';
   const extraBlock = term.extra ? `
       <div class="extra-context">
-        <div class="extra-label"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg> ${escapeHtml(term.extra_label || 'Заметка')}:</div>
+        <div class="extra-label"><img src="img/info.svg" alt="info" width="16" height="16" style="vertical-align:middle;opacity:0.7;"> ${escapeHtml(term.extra_label || 'Заметка')}:</div>
         <div class="md-content">${renderMarkdown(term.extra)}</div>
       </div>
   ` : '';
@@ -169,14 +170,16 @@ function renderTermCard(term) {
 
 function renderContent() {
   const container = document.getElementById('content-container');
-  container.innerHTML = window.DICTIONARY_DATA.sections.map(section => `
+  container.innerHTML = window.DICTIONARY_DATA.sections.map(section => {
+    const cleanTitle = section.title.replace(/[\p{Emoji_Presentation}\p{Extended_Pictographic}]/gu, '').trim();
+    return `
     <div class="section-wrapper" id="${escapeHtml(section.id)}">
-      <div class="section-header"><h2>${escapeHtml(section.title)}</h2></div>
+      <div class="section-header"><h2>${escapeHtml(cleanTitle)}</h2></div>
       <div class="terms-grid">
         ${section.terms.map(renderTermCard).join('')}
       </div>
     </div>
-  `).join('') + renderStatsSection();
+  `}).join('') + renderStatsSection();
 }
 
 function renderStatsSection() {
@@ -188,7 +191,7 @@ function renderStatsSection() {
           Словарь приведен к релизной структуре: 21 тематический раздел, явные типы карточек, компактный указатель акронимов, развернутые определения, практическая важность, примеры, дополнительный контекст и связанные термины для полноценных статей.
         </div>
         <div class="term-importance">
-          Версия ${escapeHtml(window.DICTIONARY_DATA.meta.version)} — ${escapeHtml(window.DICTIONARY_DATA.meta.updated)}. Автор: AI Expert & Prompt Engineering Specialist. Лицензия: образовательное использование.
+          Версия ${escapeHtml(window.DICTIONARY_DATA.meta.version)} — ${escapeHtml(window.DICTIONARY_DATA.meta.updated)}. Автор: AI Expert &amp; Prompt Engineering Specialist. Лицензия: образовательное использование.
         </div>
       </div>
     </div>
@@ -201,45 +204,64 @@ function updateStats() {
   document.getElementById('stat-basic').textContent = terms.filter(term => term.level === 'Базовый').length;
   document.getElementById('stat-medium').textContent = terms.filter(term => term.level === 'Средний').length;
   document.getElementById('stat-advanced').textContent = terms.filter(term => term.level === 'Продвинутый').length;
-  document.getElementById('stat-new').textContent = terms.filter(term => term.level === 'Новое').length;
+}
+
+function updateLogo(isDark) {
+  const logo = document.getElementById('sidebar-logo');
+  if (!logo) return;
+  logo.src = isDark ? logo.dataset.srcDark : logo.dataset.srcLight;
 }
 
 function toggleTheme() {
-  const body = document.body;
-  const isDark = body.hasAttribute('data-theme');
+  const root = document.documentElement;
+  const isDark = root.hasAttribute('data-theme');
   const themeIcon = document.getElementById('theme-icon');
   const themeText = document.getElementById('theme-text');
-  const moonSvg = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
-  const sunSvg = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>';
+
+  // Временно отключаем ВСЕ CSS-transitions на странице.
+  root.classList.add('theme-switching');
 
   if (isDark) {
-    body.removeAttribute('data-theme');
-    themeIcon.innerHTML = moonSvg;
+    root.removeAttribute('data-theme');
+    root.style.colorScheme = 'light';
+    // Темная тема выключена — кнопка предлагает включить тёмную
+    themeIcon.innerHTML = '<img src="img/dark.svg" alt="Тёмная тема" width="20" height="20" style="vertical-align:middle;">';
     themeText.textContent = 'Тёмная тема';
     localStorage.setItem('theme', 'light');
+    updateLogo(false);
   } else {
-    body.setAttribute('data-theme', 'dark');
-    themeIcon.innerHTML = sunSvg;
+    root.setAttribute('data-theme', 'dark');
+    root.style.colorScheme = 'dark';
+    // Тёмная тема включена — кнопка предлагает переключить на светлую
+    themeIcon.innerHTML = '<img src="img/light.svg" alt="Светлая тема" width="20" height="20" style="vertical-align:middle;">';
     themeText.textContent = 'Светлая тема';
     localStorage.setItem('theme', 'dark');
+    updateLogo(true);
   }
+
+  // Принудительный reflow: браузер ОБЯЗАН применить новые стили до след. кадра.
+  void root.offsetHeight;
+
+  // Снимаем класс — hover-transitions и прочие анимации возвращаются.
+  root.classList.remove('theme-switching');
 }
 
 function loadSavedTheme() {
   if (window.Telegram?.WebApp) return;
   const savedTheme = localStorage.getItem('theme');
-  const moonIcon = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
-  const sunIcon = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>';
+  const root = document.documentElement;
   if (savedTheme === 'light') {
-    document.documentElement.style.colorScheme = 'light';
-    document.body.removeAttribute('data-theme');
-    document.getElementById('theme-icon').innerHTML = moonIcon;
+    root.removeAttribute('data-theme');
+    root.style.colorScheme = 'light';
+    document.getElementById('theme-icon').innerHTML = '<img src="img/dark.svg" alt="Тёмная тема" width="20" height="20" style="vertical-align:middle;">';
     document.getElementById('theme-text').textContent = 'Тёмная тема';
+    updateLogo(false);
   } else {
-    document.documentElement.style.colorScheme = 'dark';
-    document.body.setAttribute('data-theme', 'dark');
-    document.getElementById('theme-icon').innerHTML = sunIcon;
+    root.setAttribute('data-theme', 'dark');
+    root.style.colorScheme = 'dark';
+    document.getElementById('theme-icon').innerHTML = '<img src="img/light.svg" alt="Светлая тема" width="20" height="20" style="vertical-align:middle;">';
     document.getElementById('theme-text').textContent = 'Светлая тема';
+    updateLogo(true);
   }
 }
 
@@ -285,33 +307,36 @@ function registerServiceWorker() {
 function initTelegramWebApp() {
   if (!window.Telegram?.WebApp) return;
   const tg = window.Telegram.WebApp;
-  if (tg.colorScheme === 'dark' || tg.isDarkMode) {
-    document.body.setAttribute('data-theme', 'dark');
-    document.getElementById('theme-icon').textContent = '☀️';
-    document.getElementById('theme-text').textContent = 'Светлая тема';
-  }
+  const root = document.documentElement;
+
+  const applyTelegramTheme = (isDark) => {
+    if (isDark) {
+      root.setAttribute('data-theme', 'dark');
+      root.style.colorScheme = 'dark';
+      document.getElementById('theme-icon').innerHTML = '<img src="img/light.svg" alt="Светлая тема" width="20" height="20" style="vertical-align:middle;">';
+      document.getElementById('theme-text').textContent = 'Светлая тема';
+      updateLogo(true);
+    } else {
+      root.removeAttribute('data-theme');
+      root.style.colorScheme = 'light';
+      document.getElementById('theme-icon').innerHTML = '<img src="img/dark.svg" alt="Тёмная тема" width="20" height="20" style="vertical-align:middle;">';
+      document.getElementById('theme-text').textContent = 'Тёмная тема';
+      updateLogo(false);
+    }
+  };
+
+  applyTelegramTheme(tg.colorScheme === 'dark' || tg.isDarkMode);
+
   if (typeof tg.onEvent === 'function') {
     tg.onEvent('themeChanged', () => {
-      const nextTheme = tg.colorScheme === 'dark' || tg.isDarkMode ? 'dark' : 'light';
-      if (nextTheme === 'dark') {
-        document.body.setAttribute('data-theme', 'dark');
-        document.getElementById('theme-icon').textContent = '☀️';
-        document.getElementById('theme-text').textContent = 'Светлая тема';
-      } else {
-        document.body.removeAttribute('data-theme');
-        document.getElementById('theme-icon').textContent = '🌙';
-        document.getElementById('theme-text').textContent = 'Темная тема';
-      }
+      applyTelegramTheme(tg.colorScheme === 'dark' || tg.isDarkMode);
     });
   }
 }
 
-
 function handleSearch() {
   const query = document.getElementById('search').value.toLowerCase().trim();
   const sections = document.querySelectorAll('.section-wrapper');
-  let visibleTerms = 0;
-  const totalTerms = document.querySelectorAll('.term-card').length;
 
   sections.forEach(section => {
     const cards = section.querySelectorAll('.term-card');
@@ -322,10 +347,7 @@ function handleSearch() {
       const eng = card.getAttribute('data-eng').toLowerCase();
       const visible = !query || title.includes(query) || eng.includes(query);
       card.style.display = visible ? 'flex' : 'none';
-      if (visible) {
-        visibleCount += 1;
-        visibleTerms += 1;
-      }
+      if (visible) visibleCount += 1;
     });
 
     section.style.display = visibleCount > 0 ? 'block' : 'none';
