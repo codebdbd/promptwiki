@@ -39,8 +39,8 @@
             --sidebar-text-active: #ffffff;
             --sidebar-hover-bg: #1e293b;
             --sidebar-hover-text: #ffffff;
-            --sidebar-active-bg: #2563eb;
-            --sidebar-active-text: #ffffff;
+            --sidebar-active-bg: rgba(56, 189, 248, 0.12);
+            --sidebar-active-text: #38bdf8;
             --header-bg: linear-gradient(135deg, #111827, #1e293b);
             --header-text: #f3f4f6;
             --focus-border: #38bdf8;
