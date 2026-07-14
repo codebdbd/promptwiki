@@ -211,7 +211,7 @@
             display: block;
             padding: 10px 12px;
             border-radius: 8px;
-            transition: all 0.2s ease;
+            transition: background-color 0.2s, color 0.2s;
             white-space: normal;
             line-height: 1.4;
         }
@@ -288,7 +288,7 @@
             color: var(--text-primary);
             font-size: 0.95rem;
             outline: none;
-            transition: all 0.2s;
+            transition: border-color 0.2s, box-shadow 0.2s;
             box-shadow: var(--shadow);
         }
 
@@ -319,7 +319,7 @@
             font-weight: 500;
             font-size: 0.9rem;
             box-shadow: var(--shadow);
-            transition: all 0.2s;
+            transition: background-color 0.2s, border-color 0.2s, color 0.2s;
         }
 
         .theme-toggle:hover {
@@ -705,7 +705,7 @@
             border-radius: 999px;
             font-size: 0.84rem;
             border: 1px solid var(--border);
-            transition: all 0.2s ease;
+            transition: background-color 0.2s, color 0.2s, border-color 0.2s;
         }
 
         .related-link:hover {
