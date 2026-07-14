@@ -225,15 +225,17 @@
         }
         
         .sidebar-sec-num {
-            font-size: 0.8rem;
-            opacity: 0.9;
-            font-weight: 600;
-            color: var(--text-primary);
+            font-size: 0.7rem;
+            opacity: 0.5;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
         }
-        
+
         .sidebar-sec-title {
             font-size: 0.95rem;
             font-weight: 600;
+            color: var(--text-primary);
         }
 
         .sidebar-item a:hover {
