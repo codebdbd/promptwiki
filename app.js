@@ -91,7 +91,7 @@ function renderSidebar() {
       .trim();
     return `
     <li class="sidebar-item" data-sec="${escapeHtml(section.id)}">
-      <a href="#${escapeHtml(section.id)}">
+      <a href="#${escapeHtml(section.id)}" onclick="clearSearch(); closeSidebar();">
         <span class="sidebar-sec-num">Раздел ${index + 1}</span><br>
         <span class="sidebar-sec-title">${escapeHtml(cleanTitle)}</span>
       </a>
@@ -102,7 +102,7 @@ function renderSidebar() {
 
 function renderTermCard(term) {
   const levelClass = LEVEL_CLASS[term.level] || 'difficulty-medium';
-  const related = (term.related || []).map(item => `<span class="related-link">${escapeHtml(item)}</span>`).join('');
+  const related = (term.related || []).map(item => `<button type="button" class="related-link" onclick="searchByTag(this.textContent)">${escapeHtml(item)}</button>`).join('');
   const english = term.english ? `<span class="term-english">(${escapeHtml(term.english)})</span>` : '';
   const typeLabel = TYPE_LABEL[term.type] || TYPE_LABEL.term;
   const typeBadge = `<span class="type-badge type-${escapeHtml(term.type || 'term')}">${escapeHtml(typeLabel)}</span>`;
@@ -352,6 +352,22 @@ function handleSearch() {
 
     section.style.display = visibleCount > 0 ? 'block' : 'none';
   });
+}
+
+function searchByTag(tag) {
+  const searchInput = document.getElementById('search');
+  searchInput.value = tag;
+  handleSearch();
+  // Плавно прокручиваем наверх, чтобы пользователь видел результаты поиска
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function clearSearch() {
+  const searchInput = document.getElementById('search');
+  if (searchInput.value !== '') {
+    searchInput.value = '';
+    handleSearch();
+  }
 }
 
 function observeSections() {
