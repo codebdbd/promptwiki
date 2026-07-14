@@ -195,18 +195,15 @@
             border-bottom: 1px solid var(--border);
         }
 
-        .sidebar-brand-text {
-            line-height: 1.2;
+        .sidebar-logo-link {
+            display: block;
+            text-decoration: none;
         }
 
-        .sidebar-brand-title {
-            font-size: 1.6rem;
-            letter-spacing: 0.15em;
-        }
-
-        .sidebar-brand-subtitle {
-            font-size: 0.85rem;
-            letter-spacing: 0.05em;
+        .sidebar-logo {
+            width: 100%;
+            max-width: 200px;
+            height: auto;
         }
 
         .sidebar-menu {
