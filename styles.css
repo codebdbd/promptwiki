@@ -75,15 +75,10 @@
             scroll-behavior: smooth;
         }
 
-        body.no-transition *,
-        body.no-transition *::before,
-        body.no-transition *::after {
-            transition: none !important;
-            animation: none !important;
-        }
-
         body {
             contain: layout style;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
         }
 
         .term-card, .stat-card, .sidebar, .top-bar, .header {
