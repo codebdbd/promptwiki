@@ -200,40 +200,37 @@ function updateStats() {
 }
 
 function toggleTheme() {
+  const html = document.documentElement;
   const body = document.body;
-  const currentTheme = body.getAttribute('data-theme');
+  const isDark = html.style.colorScheme === 'dark';
   const themeIcon = document.getElementById('theme-icon');
   const themeText = document.getElementById('theme-text');
 
-  body.classList.add('no-transition');
-
-  if (currentTheme === 'dark') {
+  if (isDark) {
+    html.style.colorScheme = 'light';
     body.removeAttribute('data-theme');
     themeIcon.textContent = '🌙';
     themeText.textContent = 'Тёмная тема';
     localStorage.setItem('theme', 'light');
   } else {
+    html.style.colorScheme = 'dark';
     body.setAttribute('data-theme', 'dark');
     themeIcon.textContent = '☀️';
     themeText.textContent = 'Светлая тема';
     localStorage.setItem('theme', 'dark');
   }
-
-  requestAnimationFrame(() => {
-    requestAnimationFrame(() => {
-      body.classList.remove('no-transition');
-    });
-  });
 }
 
 function loadSavedTheme() {
   if (window.Telegram?.WebApp) return;
   const savedTheme = localStorage.getItem('theme');
   if (savedTheme === 'light') {
+    document.documentElement.style.colorScheme = 'light';
     document.body.removeAttribute('data-theme');
     document.getElementById('theme-icon').textContent = '🌙';
     document.getElementById('theme-text').textContent = 'Тёмная тема';
   } else {
+    document.documentElement.style.colorScheme = 'dark';
     document.body.setAttribute('data-theme', 'dark');
     document.getElementById('theme-icon').textContent = '☀️';
     document.getElementById('theme-text').textContent = 'Светлая тема';
