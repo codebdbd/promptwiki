@@ -654,7 +654,7 @@
         }
 
         .copy-btn {
-            background: var(--bg-primary);
+            background: var(--code-bg);
             border: 1px solid var(--border);
             color: var(--text-secondary);
             cursor: pointer;
@@ -668,9 +668,13 @@
             transition: background-color 0.2s, color 0.2s;
         }
 
+        .copy-btn svg {
+            stroke: currentColor;
+        }
+
         .copy-btn:hover {
             background-color: var(--accent);
-            color: white;
+            color: var(--bg-primary);
             border-color: var(--accent);
         }
 
