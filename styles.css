@@ -75,18 +75,14 @@
             scroll-behavior: smooth;
         }
 
-        html, body {
-            will-change: background-color, color;
-        }
-
         html {
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
             scrollbar-width: thin;
             scrollbar-color: color-mix(in srgb, var(--accent) 58%, transparent) var(--bg-primary);
         }
 
-        body,
-        .sidebar,
-        .example-content {
+        body, .sidebar, .example-content {
             scrollbar-width: thin;
             scrollbar-color: color-mix(in srgb, var(--accent) 58%, transparent) transparent;
         }
