@@ -229,8 +229,9 @@
         
         .sidebar-sec-num {
             font-size: 0.8rem;
-            opacity: 0.6;
-            font-weight: 500;
+            opacity: 0.9;
+            font-weight: 600;
+            color: var(--text-primary);
         }
         
         .sidebar-sec-title {
@@ -439,6 +440,7 @@
             font-family: 'Outfit', sans-serif;
             font-size: 1.8rem;
             color: var(--text-primary);
+            font-weight: 700;
         }
 
         /* Term Cards Grid */
