@@ -220,7 +220,12 @@ function toggleTheme() {
 
 function loadSavedTheme() {
   if (window.Telegram?.WebApp) return;
-  if (localStorage.getItem('theme') === 'dark') {
+  const savedTheme = localStorage.getItem('theme');
+  if (savedTheme === 'light') {
+    document.body.removeAttribute('data-theme');
+    document.getElementById('theme-icon').textContent = '🌙';
+    document.getElementById('theme-text').textContent = 'Тёмная тема';
+  } else {
     document.body.setAttribute('data-theme', 'dark');
     document.getElementById('theme-icon').textContent = '☀️';
     document.getElementById('theme-text').textContent = 'Светлая тема';
