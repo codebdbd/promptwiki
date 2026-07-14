@@ -1,4 +1,4 @@
-const CACHE_NAME = 'prompt-dictionary-v3';
+const CACHE_NAME = 'prompt-dictionary-v4';
 const ASSETS_TO_CACHE = [
   'index.html',
   'prompt_engineering_dictionary.html',
@@ -6,7 +6,12 @@ const ASSETS_TO_CACHE = [
   'app.js',
   'terms-data.js',
   'manifest.webmanifest',
-  'favicon.svg'
+  'favicon.svg',
+  'img/dark.svg',
+  'img/light.svg',
+  'img/info.svg',
+  'img/logo_dark.svg',
+  'img/logo_light.svg'
 ];
 
 self.addEventListener('install', event => {
