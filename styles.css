@@ -75,6 +75,10 @@
             scroll-behavior: smooth;
         }
 
+        html, body {
+            will-change: background-color, color;
+        }
+
         html {
             scrollbar-width: thin;
             scrollbar-color: color-mix(in srgb, var(--accent) 58%, transparent) var(--bg-primary);
