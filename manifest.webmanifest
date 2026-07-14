@@ -1,0 +1,20 @@
+{
+  "name": "Полный словарь промпт-инженера",
+  "short_name": "Словарь AI",
+  "start_url": "prompt_engineering_dictionary.html",
+  "display": "standalone",
+  "orientation": "portrait",
+  "scope": ".",
+  "background_color": "#0f172a",
+  "theme_color": "#0f172a",
+  "description": "Интерактивный словарь по промпт-инженерии, LLM и искусственному интеллекту.",
+  "lang": "ru-RU",
+  "icons": [
+    {
+      "src": "favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

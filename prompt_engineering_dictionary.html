@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📘 Полный словарь промпт-инженера</title>
+    <meta name="description" content="Интерактивный справочник по промпт-инженерии, LLM-системам, RAG, агентам, оценке качества и эксплуатации AI-продуктов.">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="manifest" href="manifest.webmanifest">
+    <meta name="theme-color" content="#0f172a">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="stylesheet" href="styles.css">
+    <script>
+        // Инициализация WebApp
+        if (window.Telegram?.WebApp) {
+            const tg = window.Telegram.WebApp;
+            tg.ready();
+            tg.expand();
+        }
+    </script>
+</head>
+<body>
+    <button class="menu-toggle-btn" type="button" onclick="toggleSidebar()" aria-label="Открыть меню разделов">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+    </button>
+
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-brand">
+            <span class="sidebar-brand-text"><span class="sidebar-brand-title">СЛОВАРЬ</span><br><span class="sidebar-brand-subtitle">ПРОМПТ-ИНЖЕНЕРА</span></span>
+        </div>
+        <ul class="sidebar-menu" id="sidebar-menu"></ul>
+    </aside>
+    <div class="sidebar-backdrop" id="sidebar-backdrop" aria-hidden="true"></div>
+
+    <main class="main-content">
+        <div class="top-bar">
+            <div class="search-box">
+                <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+                <input type="text" class="search-input" id="search" placeholder="Быстрый поиск по термину или разделу..." oninput="handleSearch()" aria-label="Поиск термина или раздела">
+            </div>
+            <button class="theme-toggle" type="button" onclick="toggleTheme()">
+                <span id="theme-icon">🌙</span> <span id="theme-text">Темная тема</span>
+            </button>
+        </div>
+
+        <header class="header">
+            <h1 id="dictionary-title">Полный словарь промпт-инженера</h1>
+            <p id="dictionary-subtitle">Актуальное интерактивное руководство по ключевым концепциям LLM, архитектурам моделей, RAG, агентам и продвинутым техникам промптинга.</p>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-val" id="stat-total">0</div>
+                    <div class="stat-lbl">Всего терминов</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-val" id="stat-basic" style="color: var(--badge-basic);">0</div>
+                    <div class="stat-lbl">Базовые (🟢)</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-val" id="stat-medium" style="color: var(--badge-medium);">0</div>
+                    <div class="stat-lbl">Средние (🟡)</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-val" id="stat-advanced" style="color: var(--badge-advanced);">0</div>
+                    <div class="stat-lbl">Экспертные (🔴)</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-val" id="stat-new" style="color: var(--badge-new);">0</div>
+                    <div class="stat-lbl">Новинки (🆕)</div>
+                </div>
+            </div>
+            <a href="https://codebdbd.github.io/" target="_blank" rel="noopener noreferrer" class="support-btn">❤️ Поддержать проект</a>
+        </header>
+
+        <div id="content-container"></div>
+    </main>
+
+    <script src="terms-data.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

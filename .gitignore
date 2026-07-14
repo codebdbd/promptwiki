@@ -1,0 +1,16 @@
+# Development files
+.mimocode/
+old/
+tools/
+*.md
+!index.html
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
