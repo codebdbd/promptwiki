@@ -142,7 +142,7 @@ function renderTermCard(term) {
   ` : '';
   const extraBlock = term.extra ? `
       <div class="extra-context">
-        <div class="extra-label"><img src="img/info.svg" alt="info" width="16" height="16" style="vertical-align:middle;opacity:0.7;"> ${escapeHtml(term.extra_label || 'Заметка')}:</div>
+        <div class="extra-label"><img src="assets/img/info.svg" alt="info" width="16" height="16" style="vertical-align:middle;opacity:0.7;"> ${escapeHtml(term.extra_label || 'Заметка')}:</div>
         <div class="md-content">${renderMarkdown(term.extra)}</div>
       </div>
   ` : '';
@@ -225,7 +225,7 @@ function toggleTheme() {
     root.removeAttribute('data-theme');
     root.style.colorScheme = 'light';
     // Темная тема выключена — кнопка предлагает включить тёмную
-    themeIcon.innerHTML = '<img src="img/dark.svg" alt="Тёмная тема" width="20" height="20" style="vertical-align:middle;">';
+    themeIcon.innerHTML = '<img src="assets/img/dark.svg" alt="Тёмная тема" width="20" height="20" style="vertical-align:middle;">';
     themeText.textContent = 'Тёмная тема';
     localStorage.setItem('theme', 'light');
     updateLogo(false);
@@ -233,7 +233,7 @@ function toggleTheme() {
     root.setAttribute('data-theme', 'dark');
     root.style.colorScheme = 'dark';
     // Тёмная тема включена — кнопка предлагает переключить на светлую
-    themeIcon.innerHTML = '<img src="img/light.svg" alt="Светлая тема" width="20" height="20" style="vertical-align:middle;">';
+    themeIcon.innerHTML = '<img src="assets/img/light.svg" alt="Светлая тема" width="20" height="20" style="vertical-align:middle;">';
     themeText.textContent = 'Светлая тема';
     localStorage.setItem('theme', 'dark');
     updateLogo(true);
@@ -253,13 +253,13 @@ function loadSavedTheme() {
   if (savedTheme === 'light') {
     root.removeAttribute('data-theme');
     root.style.colorScheme = 'light';
-    document.getElementById('theme-icon').innerHTML = '<img src="img/dark.svg" alt="Тёмная тема" width="20" height="20" style="vertical-align:middle;">';
+    document.getElementById('theme-icon').innerHTML = '<img src="assets/img/dark.svg" alt="Тёмная тема" width="20" height="20" style="vertical-align:middle;">';
     document.getElementById('theme-text').textContent = 'Тёмная тема';
     updateLogo(false);
   } else {
     root.setAttribute('data-theme', 'dark');
     root.style.colorScheme = 'dark';
-    document.getElementById('theme-icon').innerHTML = '<img src="img/light.svg" alt="Светлая тема" width="20" height="20" style="vertical-align:middle;">';
+    document.getElementById('theme-icon').innerHTML = '<img src="assets/img/light.svg" alt="Светлая тема" width="20" height="20" style="vertical-align:middle;">';
     document.getElementById('theme-text').textContent = 'Светлая тема';
     updateLogo(true);
   }
@@ -313,13 +313,13 @@ function initTelegramWebApp() {
     if (isDark) {
       root.setAttribute('data-theme', 'dark');
       root.style.colorScheme = 'dark';
-      document.getElementById('theme-icon').innerHTML = '<img src="img/light.svg" alt="Светлая тема" width="20" height="20" style="vertical-align:middle;">';
+      document.getElementById('theme-icon').innerHTML = '<img src="assets/img/light.svg" alt="Светлая тема" width="20" height="20" style="vertical-align:middle;">';
       document.getElementById('theme-text').textContent = 'Светлая тема';
       updateLogo(true);
     } else {
       root.removeAttribute('data-theme');
       root.style.colorScheme = 'light';
-      document.getElementById('theme-icon').innerHTML = '<img src="img/dark.svg" alt="Тёмная тема" width="20" height="20" style="vertical-align:middle;">';
+      document.getElementById('theme-icon').innerHTML = '<img src="assets/img/dark.svg" alt="Тёмная тема" width="20" height="20" style="vertical-align:middle;">';
       document.getElementById('theme-text').textContent = 'Тёмная тема';
       updateLogo(false);
     }
@@ -358,8 +358,14 @@ function searchByTag(tag) {
   const searchInput = document.getElementById('search');
   searchInput.value = tag;
   handleSearch();
-  // Плавно прокручиваем наверх, чтобы пользователь видел результаты поиска
-  window.scrollTo({ top: 0, behavior: 'smooth' });
+  const cards = document.querySelectorAll('.term-card');
+  for (const card of cards) {
+    if (card.style.display !== 'none') {
+      const rect = card.getBoundingClientRect();
+      window.scrollTo({ top: window.scrollY + rect.top - 16, behavior: 'smooth' });
+      break;
+    }
+  }
 }
 
 function clearSearch() {

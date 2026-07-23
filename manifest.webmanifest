@@ -1,7 +1,7 @@
 {
   "name": "Полный словарь промпт-инженера",
   "short_name": "Словарь AI",
-  "start_url": "prompt_engineering_dictionary.html",
+  "start_url": "index.html",
   "display": "standalone",
   "orientation": "portrait",
   "scope": ".",
@@ -11,7 +11,7 @@
   "lang": "ru-RU",
   "icons": [
     {
-      "src": "favicon.svg",
+      "src": "assets/icons/favicon.svg",
       "sizes": "any",
       "type": "image/svg+xml",
       "purpose": "any maskable"

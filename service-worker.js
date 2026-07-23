@@ -1,17 +1,16 @@
-const CACHE_NAME = 'prompt-dictionary-v4';
+const CACHE_NAME = 'prompt-dictionary-v6';
 const ASSETS_TO_CACHE = [
   'index.html',
-  'prompt_engineering_dictionary.html',
-  'styles.css',
-  'app.js',
-  'terms-data.js',
+  'css/styles.css',
+  'js/app.js',
+  'js/terms-data.js',
   'manifest.webmanifest',
-  'favicon.svg',
-  'img/dark.svg',
-  'img/light.svg',
-  'img/info.svg',
-  'img/logo_dark.svg',
-  'img/logo_light.svg'
+  'assets/icons/favicon.svg',
+  'assets/img/dark.svg',
+  'assets/img/light.svg',
+  'assets/img/info.svg',
+  'assets/img/logo_dark.svg',
+  'assets/img/logo_light.svg'
 ];
 
 self.addEventListener('install', event => {
